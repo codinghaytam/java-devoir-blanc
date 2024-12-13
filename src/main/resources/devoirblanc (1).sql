@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2024 at 11:21 AM
+-- Generation Time: Dec 13, 2024 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -53,6 +53,7 @@ CREATE TABLE `membre` (
 --
 
 INSERT INTO `membre` (`identifiant`, `nom`, `prenom`, `email`, `phone`) VALUES
+('c601386a-acb1-440c-b120-144c0d9f3b67', 'test', 'test', 'test', 'test'),
 ('lk,rernv', 'zed,eflkjzelkf', 'test', 'ke,kl,elrv', 'ljfrlrelj');
 
 --
@@ -63,13 +64,24 @@ INSERT INTO `membre` (`identifiant`, `nom`, `prenom`, `email`, `phone`) VALUES
 -- Indexes for table `incident`
 --
 ALTER TABLE `incident`
-  ADD PRIMARY KEY (`reference`);
+  ADD PRIMARY KEY (`reference`),
+  ADD KEY `ref` (`membre_id`);
 
 --
 -- Indexes for table `membre`
 --
 ALTER TABLE `membre`
   ADD PRIMARY KEY (`identifiant`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `incident`
+--
+ALTER TABLE `incident`
+  ADD CONSTRAINT `ref` FOREIGN KEY (`membre_id`) REFERENCES `membre` (`identifiant`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
